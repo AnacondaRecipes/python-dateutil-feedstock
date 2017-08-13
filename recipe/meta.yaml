@@ -37,6 +37,7 @@ about:
     module, available in Python.
   doc_url: https://dateutil.readthedocs.org/en/latest/
   dev_url: https://github.com/dateutil/dateutil/
+  doc_source_url: https://github.com/dateutil/dateutil/blob/master/docs/index.rst
 
 extra:
   recipe-maintainers:
