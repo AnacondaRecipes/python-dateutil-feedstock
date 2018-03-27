@@ -25,6 +25,9 @@ test:
   imports:
     - dateutil
     - dateutil.rrule
+    - dateutil.parser
+    - dateutil.tz
+    - dateutil.zoneinfo
 
 about:
   home: https://dateutil.readthedocs.org/
