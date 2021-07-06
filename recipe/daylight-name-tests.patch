@@ -1,0 +1,40 @@
+diff --git a/dateutil/test/test_tz.py b/dateutil/test/test_tz.py
+index 4ca2036..e1f9834 100644
+--- a/dateutil/test/test_tz.py
++++ b/dateutil/test/test_tz.py
+@@ -1562,11 +1562,11 @@ class TzWinTest(unittest.TestCase, TzWinFoldMixin):
+
+     def testTzResNameFromString(self):
+         tzr = tzwin.tzres()
+-        self.assertEqual(tzr.name_from_string('@tzres.dll,-221'),
+-                         'Alaskan Daylight Time')
++        dt_synonyms = ['Alaskan Daylight Time', 'Alaskan Summer Time']
++        self.assertIn(tzr.name_from_string('@tzres.dll,-221'), dt_synonyms)
+
+-        self.assertEqual(tzr.name_from_string('Samoa Daylight Time'),
+-                         'Samoa Daylight Time')
++        dt_synonyms = ['Samoa Daylight Time', 'Samoa Summer Time']
++        self.assertIn(tzr.name_from_string('Samoa Daylight Time'), dt_synonyms)
+
+         with self.assertRaises(ValueError):
+             tzr.name_from_string('@tzres.dll,100')
+@@ -1586,8 +1586,8 @@ class TzWinTest(unittest.TestCase, TzWinFoldMixin):
+         tw = tz.tzwin('Eastern Standard Time')
+
+         # Cover the transitions for at least two years.
+-        ESTs = 'Eastern Standard Time'
+-        EDTs = 'Eastern Daylight Time'
++        ESTs = ['Eastern Standard Time']
++        EDTs = ['Eastern Daylight Time', 'Eastern Summer Time']
+         transition_dates = [(datetime(2015, 3, 8, 0, 59), ESTs),
+                             (datetime(2015, 3, 8, 3, 1), EDTs),
+                             (datetime(2015, 11, 1, 0, 59), EDTs),
+@@ -1598,7 +1598,7 @@ class TzWinTest(unittest.TestCase, TzWinFoldMixin):
+                             (datetime(2016, 11, 6, 3, 1), ESTs)]
+
+         for t_date, expected in transition_dates:
+-            self.assertEqual(t_date.replace(tzinfo=tw).tzname(), expected)
++            self.assertIn(t_date.replace(tzinfo=tw).tzname(), expected)
+
+     def testTzwinRepr(self):
+         tw = tz.tzwin('Yakutsk Standard Time')

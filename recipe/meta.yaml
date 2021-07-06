@@ -7,9 +7,11 @@ package:
 source:
   url: https://pypi.io/packages/source/p/python-dateutil/python-dateutil-{{ version }}.tar.gz
   sha256: 73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c
+  patches:
+    - daylight-name-tests.patch
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
