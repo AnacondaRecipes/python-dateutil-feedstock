@@ -17,6 +17,8 @@ requirements:
   host:
     - python
     - pip
+    - wheel
+    - setuptools
     - setuptools_scm
   run:
     - python
@@ -28,11 +30,18 @@ test:
     - dateutil.rrule
     - dateutil.parser
     - dateutil.tz
+    - dateutil.relativedelta
+    - dateutil.utils
     - dateutil.zoneinfo
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://dateutil.readthedocs.org/
-  license: BSD 3 Clause
+  license: BSD-3-Clause and Apache
+  license_family: BSD
   license_file: LICENSE
   summary: 'Extensions to the standard Python datetime module.'
   description: |
