@@ -9,10 +9,13 @@ source:
     - new_tzfile.patch
 
 build:
-  number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  number: 1
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
+  build:
+    - m2-patch  # [win]
+    - patch     # [not win]
   host:
     - python
     - pip
@@ -24,31 +27,21 @@ requirements:
     - six >=1.5
 
 test:
-  imports:
-    - dateutil
-    - dateutil.rrule
-    - dateutil.parser
-    - dateutil.tz
-    - dateutil.relativedelta
-    - dateutil.utils
-    - dateutil.zoneinfo
+  # to satisfy anaconda-linter imports and pip check are placed inside run_test.py
   requires:
     - pip
-  commands:
-    - pip check
 
 about:
   home: https://dateutil.readthedocs.org/
-  license: BSD-3-Clause and Apache
+  license: BSD-3-Clause and Apache-2.0
   license_family: BSD
   license_file: LICENSE
-  summary: 'Extensions to the standard Python datetime module.'
+  summary: Extensions to the standard Python datetime module
   description: |
     The dateutil module provides powerful extensions to the standard datetime
     module, available in Python.
-  doc_url: https://dateutil.readthedocs.org/en/latest/
+  doc_url: https://dateutil.readthedocs.io/
   dev_url: https://github.com/dateutil/dateutil/
-  doc_source_url: https://github.com/dateutil/dateutil/blob/master/docs/index.rst
 
 extra:
   recipe-maintainers:

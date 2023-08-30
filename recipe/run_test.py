@@ -1,28 +1,35 @@
+import subprocess
 from dateutil.relativedelta import relativedelta
 from dateutil.easter import easter
 from dateutil.rrule import rrule, YEARLY, FR
 from dateutil.parser import parse
 from dateutil.tz import tzlocal
+from dateutil import zoneinfo, utils
+
+
+# Test pip check
+subprocess.run(["pip", "check"])
+
 
 now = parse("Sat Oct 11 17:13:46 UTC 2003")
 today = now.date()
 print("Today is: %s" % today)
-assert str(today) == '2003-10-11'
+assert str(today) == "2003-10-11"
 
-year = rrule(YEARLY, dtstart=now, bymonth=8,
-             bymonthday=13, byweekday=FR)[0].year
+year = rrule(YEARLY, dtstart=now, bymonth=8, bymonthday=13, byweekday=FR)[0].year
 rdelta = relativedelta(easter(year), today)
 
 print("Year with next Aug 13th on a Friday is: %s" % year)
-assert str(year) == '2004'
+assert str(year) == "2004"
 print("How far is the Easter of that year: %s" % rdelta)
-assert str(rdelta) == 'relativedelta(months=+6)'
-print("And the Easter of that year is: %s" % (today+rdelta))
-assert str(today+rdelta) == '2004-04-11'
+assert str(rdelta) == "relativedelta(months=+6)"
+print("And the Easter of that year is: %s" % (today + rdelta))
+assert str(today + rdelta) == "2004-04-11"
 
 # test with standard library
 import time
 import datetime
+
 now = datetime.datetime.now(tzlocal())
 rfc822 = "%a, %d %b %Y %H:%M:%S %z"
 print("Now in RFC822: %s" % now.strftime(rfc822))
