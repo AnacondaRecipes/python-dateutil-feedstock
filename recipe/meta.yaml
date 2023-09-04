@@ -31,6 +31,7 @@ test:
   # to satisfy anaconda-linter imports and pip check are placed inside run_test.py
   requires:
     - pip
+    - importlib_metadata
 
 about:
   home: https://dateutil.readthedocs.org/
