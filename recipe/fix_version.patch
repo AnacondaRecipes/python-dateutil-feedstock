@@ -1,0 +1,62 @@
+From 201a8207159f1b8be4d5a3c531232ff7bf422d99 Mon Sep 17 00:00:00 2001
+From: Serhii Kupriienko <skupriienko@anaconda.com>
+Date: Thu, 7 Sep 2023 12:41:00 +0300
+Subject: [PATCH] Fix version
+
+---
+ pyproject.toml | 2 +-
+ setup.cfg      | 3 ++-
+ setup.py       | 3 ---
+ 3 files changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index e83d69f..3c1dd4a 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -3,7 +3,7 @@ requires = [
+     "setuptools; python_version != '3.3'",
+     "setuptools<40.0; python_version == '3.3'",
+     "wheel",
+-    "setuptools_scm"
++    #"setuptools_scm"
+ ]
+ build-backend = "setuptools.build_meta"
+ 
+diff --git a/setup.cfg b/setup.cfg
+index 829aa99..f7c5d15 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -3,6 +3,7 @@ universal = 1
+ 
+ [metadata]
+ name = python-dateutil
++version = 2.8.3+snowflake1
+ description = Extensions to the standard Python datetime module
+ author = Gustavo Niemeyer
+ author_email = gustavo@niemeyer.net
+@@ -35,7 +36,7 @@ classifiers =
+ 
+ [options]
+ zip_safe = True
+-setup_requires = setuptools_scm
++#setup_requires = setuptools_scm
+ install_requires = six >= 1.5
+ python_requires = >=2.7, !=3.0.*, !=3.1.*, !=3.2.*
+ packages = find:
+diff --git a/setup.py b/setup.py
+index 70e476d..328cdbc 100644
+--- a/setup.py
++++ b/setup.py
+@@ -47,9 +47,6 @@ README = README()  # NOQA
+ 
+ 
+ setup(
+-      use_scm_version={
+-          'write_to': 'dateutil/_version.py',
+-      },
+       ## Needed since doctest not supported by PyPA.
+       long_description = README,
+       cmdclass={
+-- 
+2.39.0
+
