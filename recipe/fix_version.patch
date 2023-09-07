@@ -1,5 +1,5 @@
 From 201a8207159f1b8be4d5a3c531232ff7bf422d99 Mon Sep 17 00:00:00 2001
-From: Serhii Kupriienko <skupriienko@anaconda.com>
+From: Serhii Kupriienko
 Date: Thu, 7 Sep 2023 12:41:00 +0300
 Subject: [PATCH] Fix version
 
