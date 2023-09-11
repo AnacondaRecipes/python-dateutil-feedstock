@@ -39,7 +39,7 @@ test:
     - importlib_metadata
 
 about:
-  home: https://dateutil.readthedocs.org/
+  home: https://dateutil.readthedocs.io/
   license: BSD-3-Clause and Apache-2.0
   license_family: BSD
   license_file: LICENSE
