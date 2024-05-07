@@ -8,10 +8,9 @@ from dateutil import zoneinfo, utils
 from importlib_metadata import version
 
 
-# Test pip check
-subprocess.run(["pip", "check"])
 
-assert version("python-dateutil") == "2.8.3+snowflake1"
+# Enable for snowflake version
+# assert version("python-dateutil") == "2.8.3+snowflake1"
 
 now = parse("Sat Oct 11 17:13:46 UTC 2003")
 today = now.date()
