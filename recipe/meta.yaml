@@ -1,21 +1,34 @@
 package:
   name: python-dateutil
+  # The Python packaging ecosystem and conda support what's called a local version identifier (https://peps.python.org/pep-0440/#local-version-identifiers).
+  # So instead of 2.8.3a1 use 2.8.3+snowflake<n>
+  # version: 2.8.3+snowflake1
   version: 2.9.0post0
 
 source:
   url: https://pypi.io/packages/source/p/python-dateutil/python-dateutil-2.8.2.tar.gz
   sha256: 0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86
+  # For snowflake version
+  # patches:
+  #   - new_tzfile.patch
+  #   - fix_version.patch
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
+  # For snowflake version
+  # build:
+  #   - m2-patch  # [win]
+  #   - patch     # [not win]
   host:
     - python
     - pip
     - wheel
     - setuptools
+    # Disable setuptools_scm because we patch the package version vy 'fix_version.patch'
+    # Enable for defaults version
     - setuptools_scm
   run:
     - python
