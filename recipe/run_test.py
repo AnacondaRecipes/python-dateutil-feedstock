@@ -8,8 +8,6 @@ from dateutil import zoneinfo, utils
 from importlib_metadata import version
 
 
-# Test pip check
-subprocess.run(["pip", "check"])
 
 # Enable for snowflake version
 # assert version("python-dateutil") == "2.8.3+snowflake1"

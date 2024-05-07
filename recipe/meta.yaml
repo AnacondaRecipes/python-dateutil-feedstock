@@ -39,6 +39,8 @@ test:
   requires:
     - pip
     - importlib_metadata
+  commands:
+    - pip check
 
 about:
   home: https://dateutil.readthedocs.io/
