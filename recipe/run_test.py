@@ -1,16 +1,9 @@
-import subprocess
 from dateutil.relativedelta import relativedelta
 from dateutil.easter import easter
 from dateutil.rrule import rrule, YEARLY, FR
 from dateutil.parser import parse
 from dateutil.tz import tzlocal
 from dateutil import zoneinfo, utils
-from importlib_metadata import version
-
-
-
-# Enable for snowflake version
-# assert version("python-dateutil") == "2.8.3+snowflake1"
 
 now = parse("Sat Oct 11 17:13:46 UTC 2003")
 today = now.date()
