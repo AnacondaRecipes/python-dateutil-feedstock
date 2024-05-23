@@ -1,25 +1,41 @@
 {% set name = "python-dateutil" %}
 {% set version = "2.9.0.post0" %}
+{% set sf_version = version|replace(".post0", "+snowflake0") %}
+# REMEMBER to set this according to whether for defaults or snowflake
+# REMEMBER to update the snowflake package version in fix_version.patch
+{% set for_sf = True %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: {{ sf_version if for_sf else version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3
+{% if for_sf %}
+  patches:
+    - new_tzfile.patch
+    - fix_version.patch
+{% endif %}
 
 build:
   number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
+{% if for_sf %}
+  build:
+    - m2-patch  # [win]
+    - patch     # [not win]
+{% endif %}
   host:
     - python
     - pip
     - wheel
     - setuptools
+{% if not for_sf %}
     - setuptools_scm <8.0
+{% endif %}
   run:
     - python
     - six >=1.5
@@ -28,8 +44,11 @@ test:
   requires:
     - pip
     - importlib_metadata
+  files:
+    - smoke_test.py
   commands:
     - pip check
+    - python smoke_test.py {{ sf_version if for_sf else version }}
 
 about:
   home: https://dateutil.readthedocs.io/
