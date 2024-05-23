@@ -3,7 +3,11 @@ from dateutil.easter import easter
 from dateutil.rrule import rrule, YEARLY, FR
 from dateutil.parser import parse
 from dateutil.tz import tzlocal
-from dateutil import zoneinfo, utils
+from importlib_metadata import version
+import sys
+
+# For snowflake version: check version is correct
+assert version("python-dateutil") == sys.argv[1]
 
 now = parse("Sat Oct 11 17:13:46 UTC 2003")
 today = now.date()
