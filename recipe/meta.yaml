@@ -1,16 +1,19 @@
 {% set name = "python-dateutil" %}
-{% set version = "2.9.0.post0" %}
+# two versions here is a temporary fix to make sure this package takes precedence over the current
+# incorrect package 2.9.0post0
+{% set version = "2.9.0post0" %}
+{% set url_version = "2.9.0.post0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ url_version }}.tar.gz
   sha256: 37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
