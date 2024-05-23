@@ -1,8 +1,8 @@
-diff --git a/dateutil/test/test_tz.py b/dateutil/test/test_tz.py
-index e5e4772..71e7a9f 100644
---- a/dateutil/test/test_tz.py
-+++ b/dateutil/test/test_tz.py
-@@ -1199,17 +1199,31 @@ class ZoneInfoGettzTest(GettzTest):
+Index: python-dateutil-2.9.0.post0/tests/test_tz.py
+===================================================================
+--- python-dateutil-2.9.0.post0.orig/tests/test_tz.py	2024-03-01 12:35:19.000000000 -0600
++++ python-dateutil-2.9.0.post0/tests/test_tz.py	2024-05-23 13:35:21.759843154 -0500
+@@ -1199,17 +1199,31 @@
          return zoneinfo_file.get(name)
  
      def testZoneInfoFileStart1(self):
@@ -39,7 +39,7 @@ index e5e4772..71e7a9f 100644
          self.assertEqual(end_est.tzname(), "EST")
  
      def testZoneInfoOffsetSignal(self):
-@@ -1990,14 +2004,25 @@ class TZICalTest(unittest.TestCase, TzFoldMixin):
+@@ -1990,14 +2004,25 @@
  class TZTest(unittest.TestCase):
      def testFileStart1(self):
          tzc = tz.tzfile(BytesIO(base64.b64decode(TZFILE_EST5EDT)))
@@ -70,7 +70,7 @@ index e5e4772..71e7a9f 100644
          self.assertEqual(end_est.tzname(), "EST")
  
      def testFileLastTransition(self):
-@@ -2006,9 +2031,8 @@ class TZTest(unittest.TestCase):
+@@ -2006,9 +2031,8 @@
          self.assertEqual(datetime(2037, 10, 25, 0, 59, tzinfo=tzc).tzname(),
                           "EDT")
  
@@ -82,7 +82,7 @@ index e5e4772..71e7a9f 100644
  
          self.assertEqual(datetime(2038, 5, 25, 12, 0, tzinfo=tzc).tzname(),
                           "EST")
-@@ -2043,22 +2067,6 @@ class TZTest(unittest.TestCase):
+@@ -2043,22 +2067,6 @@
          remaining_tzfile_content = fileobj.read()
          self.assertEqual(len(remaining_tzfile_content), 0)
  
@@ -105,11 +105,10 @@ index e5e4772..71e7a9f 100644
      def testGMTHasNoDaylight(self):
          # tz.tzstr("GMT+2") improperly considered daylight saving time.
          # Issue reported by Lennart Regebro.
-diff --git a/dateutil/tz/_tzfile.py b/dateutil/tz/_tzfile.py
-new file mode 100644
-index 0000000..4a905fd
---- /dev/null
-+++ b/dateutil/tz/_tzfile.py
+Index: python-dateutil-2.9.0.post0/src/dateutil/tz/_tzfile.py
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ python-dateutil-2.9.0.post0/src/dateutil/tz/_tzfile.py	2024-05-23 13:35:21.760915181 -0500
 @@ -0,0 +1,1055 @@
 +import bisect
 +import calendar
@@ -1166,11 +1165,11 @@ index 0000000..4a905fd
 +        epoch = ordinal * 86400
 +        epoch += self.hour * 3600 + self.minute * 60 + self.second
 +        return epoch
-diff --git a/dateutil/tz/tz.py b/dateutil/tz/tz.py
-index c67f56d..f002d22 100644
---- a/dateutil/tz/tz.py
-+++ b/dateutil/tz/tz.py
-@@ -19,9 +19,16 @@ from collections import OrderedDict
+Index: python-dateutil-2.9.0.post0/src/dateutil/tz/tz.py
+===================================================================
+--- python-dateutil-2.9.0.post0.orig/src/dateutil/tz/tz.py	2024-03-01 12:35:19.000000000 -0600
++++ python-dateutil-2.9.0.post0/src/dateutil/tz/tz.py	2024-05-23 13:35:21.762216664 -0500
+@@ -19,9 +19,16 @@
  import six
  from six import string_types
  from six.moves import _thread
@@ -1190,15 +1189,15 @@ index c67f56d..f002d22 100644
  
  from ._factories import _TzSingleton, _TzOffsetFactory
  from ._factories import _TzStrFactory
-@@ -35,7 +42,6 @@ from warnings import warn
+@@ -35,7 +42,6 @@
  
  ZERO = datetime.timedelta(0)
- EPOCH = datetime.datetime.utcfromtimestamp(0)
+ EPOCH = datetime.datetime(1970, 1, 1, 0, 0)
 -EPOCHORDINAL = EPOCH.toordinal()
  
  
  @six.add_metaclass(_TzSingleton)
-@@ -325,552 +331,6 @@ class tzlocal(_tzinfo):
+@@ -325,552 +331,6 @@
      __reduce__ = object.__reduce__
  
  
