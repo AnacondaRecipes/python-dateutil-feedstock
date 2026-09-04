@@ -5,15 +5,18 @@
 {% set url_version = "2.9.0.post0" %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: {{ name }}
+  version: {{ version }}+snowflake1
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ url_version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ url_version }}.tar.gz
   sha256: 37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3
+  patches:
+    - patches/new_tzfile.patch
+    - patches/fix_version.patch
 
 build:
-  number: 2
+  number: 100
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -22,20 +25,23 @@ requirements:
     - pip
     - wheel
     - setuptools
-    - setuptools_scm <8.0
   run:
     - python
     - six >=1.5
 
 test:
+  files:
+    - tests/zone_info_fix_test.py
+  commands:
+    - pip check
+    # Note: The bug is only exercised on Snowflake's Snowpark UDF sandbox
+    - python tests/zone_info_fix_test.py
   requires:
     - pip
     - importlib_metadata
-  commands:
-    - pip check
 
 about:
-  home: https://dateutil.readthedocs.io/
+  home: https://dateutil.readthedocs.io
   license: BSD-3-Clause and Apache-2.0
   license_family: BSD
   license_file: LICENSE
@@ -43,8 +49,8 @@ about:
   description: |
     The dateutil module provides powerful extensions to the standard datetime
     module, available in Python.
-  doc_url: https://dateutil.readthedocs.io/
-  dev_url: https://github.com/dateutil/dateutil/
+  doc_url: https://dateutil.readthedocs.io
+  dev_url: https://github.com/dateutil/dateutil
 
 extra:
   recipe-maintainers:
