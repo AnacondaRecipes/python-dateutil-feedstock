@@ -6,7 +6,7 @@
 
 package:
   name: {{ name }}
-  version: {{ version }}
+  version: {{ version }}+snowflake
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ url_version }}.tar.gz
@@ -16,7 +16,7 @@ source:
     - patches/fix_version.patch
 
 build:
-  number: 3
+  number: 100
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -25,7 +25,6 @@ requirements:
     - pip
     - wheel
     - setuptools
-    - setuptools_scm <8.0
   run:
     - python
     - six >=1.5
