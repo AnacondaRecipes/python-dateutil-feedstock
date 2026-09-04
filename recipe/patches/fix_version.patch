@@ -1,0 +1,59 @@
+From 201a8207159f1b8be4d5a3c531232ff7bf422d99 Mon Sep 17 00:00:00 2001
+From: Serhii Kupriienko
+Date: Thu, 7 Sep 2023 12:41:00 +0300
+Subject: [PATCH] Fix version
+
+---
+ pyproject.toml | 2 +-
+ setup.cfg      | 3 ++-
+ setup.py       | 3 ---
+ 3 files changed, 3 insertions(+), 5 deletions(-)
+
+Index: python-dateutil-2.9.0.post0/pyproject.toml
+===================================================================
+--- python-dateutil-2.9.0.post0.orig/pyproject.toml	2024-05-23 13:35:42.454840375 -0500
++++ python-dateutil-2.9.0.post0/pyproject.toml	2024-05-23 13:36:28.944880424 -0500
+@@ -3,7 +3,7 @@
+     "setuptools; python_version != '3.3'",
+     "setuptools<40.0; python_version == '3.3'",
+     "wheel",
+-    "setuptools_scm<8.0"
++    #"setuptools_scm<8.0"
+ ]
+ build-backend = "setuptools.build_meta"
+ 
+Index: python-dateutil-2.9.0.post0/setup.cfg
+===================================================================
+--- python-dateutil-2.9.0.post0.orig/setup.cfg	2024-05-23 13:35:42.455801195 -0500
++++ python-dateutil-2.9.0.post0/setup.cfg	2024-05-23 13:36:28.945188753 -0500
+@@ -3,6 +3,7 @@
+ 
+ [metadata]
+ name = python-dateutil
++version = 2.9.0+snowflake0
+ description = Extensions to the standard Python datetime module
+ author = Gustavo Niemeyer
+ author_email = gustavo@niemeyer.net
+@@ -38,7 +39,7 @@
+ 
+ [options]
+ zip_safe = True
+-setup_requires = setuptools_scm
++#setup_requires = setuptools_scm
+ install_requires = six >= 1.5
+ package_dir = 
+ 	=src
+Index: python-dateutil-2.9.0.post0/setup.py
+===================================================================
+--- python-dateutil-2.9.0.post0.orig/setup.py	2024-05-23 13:35:42.456537644 -0500
++++ python-dateutil-2.9.0.post0/setup.py	2024-05-23 13:36:28.945383000 -0500
+@@ -47,9 +47,6 @@
+ 
+ 
+ setup(
+-      use_scm_version={
+-          'write_to': 'src/dateutil/_version.py',
+-      },
+       ## Needed since doctest not supported by PyPA.
+       long_description = README,
+       cmdclass={
