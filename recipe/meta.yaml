@@ -6,7 +6,7 @@
 
 package:
   name: {{ name }}
-  version: {{ version }}+snowflake0
+  version: {{ version }}+snowflake1
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ url_version }}.tar.gz
@@ -34,6 +34,7 @@ test:
     - tests/zone_info_fix_test.py
   commands:
     - pip check
+    # Note: The bug is only exercised on Snowflake's Snowpark UDF sandbox
     - python tests/zone_info_fix_test.py
   requires:
     - pip

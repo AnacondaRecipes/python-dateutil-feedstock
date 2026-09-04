@@ -1,3 +1,6 @@
+# File: patches/new_tzfile.patch
+# Backport zoneinfo logic into dateutil.tz.tzfile
+# Adapted from upstream PR: https://github.com/dateutil/dateutil/pull/1130
 Index: python-dateutil-2.9.0.post0/tests/test_tz.py
 ===================================================================
 --- python-dateutil-2.9.0.post0.orig/tests/test_tz.py	2024-03-01 12:35:19.000000000 -0600

@@ -30,7 +30,7 @@ Index: python-dateutil-2.9.0.post0/setup.cfg
  
  [metadata]
  name = python-dateutil
-+version = 2.9.0+snowflake0
++version = 2.9.0post0+snowflake1
  description = Extensions to the standard Python datetime module
  author = Gustavo Niemeyer
  author_email = gustavo@niemeyer.net
