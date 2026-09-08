@@ -48,7 +48,7 @@ about:
   summary: Extensions to the standard Python datetime module
   description: |
     The dateutil module provides powerful extensions to the standard datetime
-    module, available in Python.
+    module, available in Python
   doc_url: https://dateutil.readthedocs.io
   dev_url: https://github.com/dateutil/dateutil
 
