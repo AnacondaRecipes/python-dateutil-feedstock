@@ -1,19 +1,17 @@
 {% set name = "python-dateutil" %}
-# two versions here is a temporary fix to make sure this package takes precedence over the current
-# incorrect package 2.9.0post0
-{% set version = "2.9.0post0" %}
-{% set url_version = "2.9.0.post0" %}
+{% set version = "4.0.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ url_version }}.tar.gz
-  sha256: 37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/python_dateutil-{{ version }}.tar.gz
+  sha256: d7295ff14fdc0f92f662100bfb6c551d160ca090f2939f1ec5b9794265c03f06
 
 build:
-  number: 2
+  number: 0
+  skip: True  # [py<311]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -21,16 +19,25 @@ requirements:
     - python
     - pip
     - wheel
-    - setuptools
-    - setuptools_scm <8.0
+    - hatchling >=1.27
+    - hatch-vcs >=0.4
+    - hatch-fancy-pypi-readme >=24.1
   run:
     - python
-    - six >=1.5
+    - python-tzdata
 
 test:
   requires:
     - pip
     - importlib_metadata
+  imports:
+    - dateutil
+    - dateutil.relativedelta
+    - dateutil.rrule
+    - dateutil.parser
+    - dateutil.tz
+    - dateutil.zoneinfo
+    - dateutil.utils
   commands:
     - pip check
 
