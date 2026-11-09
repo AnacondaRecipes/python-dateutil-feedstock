@@ -24,7 +24,7 @@ requirements:
     - hatch-fancy-pypi-readme >=24.1
   run:
     - python
-    - tzdata
+    - python-tzdata
 
 test:
   requires:
